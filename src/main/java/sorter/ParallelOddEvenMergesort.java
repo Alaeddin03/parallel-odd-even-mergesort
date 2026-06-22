@@ -6,7 +6,7 @@ import java.util.concurrent.RecursiveAction;
 /**
  * ParallelOddEvenMergesort
  * ═════════════════════════
- * True parallel implementation of Batcher's Odd-Even Merge Sort (1968)
+ * Parallel implementation of Batcher's Odd-Even Merge Sort (1968)
  * using Java's ForkJoinPool / RecursiveAction framework.
  *
  * ──────────────────────────────────────────────────────────────────────
@@ -45,8 +45,8 @@ import java.util.concurrent.RecursiveAction;
  * Padding: non-power-of-2 n padded to next power of 2 with Integer.MAX_VALUE.
  *
  * Complexity:
- *   Comparisons : O(n log²n)
- *   Parallel depth : O(log²n)
+ *   Comparisons : O(n log n)
+ *   Parallel depth : O(log n)
  * ──────────────────────────────────────────────────────────────────────
  */
 public class ParallelOddEvenMergesort {
