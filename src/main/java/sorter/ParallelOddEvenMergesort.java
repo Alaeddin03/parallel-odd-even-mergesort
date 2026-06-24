@@ -45,7 +45,7 @@ import java.util.concurrent.RecursiveAction;
  * Padding: non-power-of-2 n padded to next power of 2 with Integer.MAX_VALUE.
  *
  * Complexity:
- *   Comparisons : O(n log n)
+ *   Comparisons : O(n (log n)^2)
  *   Parallel depth : O(log n)
  * ──────────────────────────────────────────────────────────────────────
  */

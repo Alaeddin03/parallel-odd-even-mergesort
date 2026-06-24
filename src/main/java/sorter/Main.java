@@ -3,7 +3,6 @@ package sorter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Main — driver for Parallel Odd-Even Mergesort
@@ -42,26 +41,22 @@ public class Main {
         System.out.printf("    Loaded %,d elements%n", fullData.length);
 
         List<RunResult> results = new ArrayList<>();
-        Random rng = new Random(42);   // fixed seed → reproducible shuffle
 
         for (int size : SIZES) {
             System.out.printf("%n[Size = %,d]%n", size);
 
             int[] slice = Arrays.copyOf(fullData, size);
 
-            // ── Fisher-Yates shuffle ─────────────────────────────────────
-            int[] randomData = shuffled(slice, rng);
-
             // ── Run 1: Random / original order ───────────────────────────
             System.out.print("  Run 1 — Random order … ");
-            RunResult r1 = runSort("Random  | n=" + size, randomData);
+            RunResult r1 = runSort("Random  | n=" + size, slice);
             results.add(r1);
             System.out.printf("cmp=%,d  moves=%,d  time=%.2f ms%n",
                               r1.comparisons, r1.moves, r1.elapsedMs);
 
             // ── Run 2: Pre-sorted order ──────────────────────────────────
             System.out.print("  Run 2 — Pre-sorted order … ");
-            int[] sortedInput = randomData.clone();
+            int[] sortedInput = slice.clone();
             Arrays.sort(sortedInput);
             RunResult r2 = runSort("Sorted  | n=" + size, sortedInput);
             results.add(r2);
@@ -95,16 +90,4 @@ public class Main {
                              elapsedMs, unsortedSnap, sortedSnap);
     }
 
-    // ── Fisher-Yates shuffle ─────────────────────────────────────────────
-
-    private static int[] shuffled(int[] arr, Random rng) {
-        int[] a = arr.clone();
-        for (int i = a.length - 1; i > 0; i--) {
-            int j   = rng.nextInt(i + 1);
-            int tmp = a[i];
-            a[i]    = a[j];
-            a[j]    = tmp;
-        }
-        return a;
-    }
 }
